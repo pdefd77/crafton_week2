@@ -18,6 +18,6 @@ public class SetRuleImage : MonoBehaviour
     public void SetRuleTransform()
     {
         LayoutRebuilder.ForceRebuildLayoutImmediate(ruleText);
-        transform.GetComponent<RectTransform>().sizeDelta = new Vector2(ruleText.rect.width * 1.2f, ruleText.rect.height * 1.2f);
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(ruleText.rect.width * 1.1f, ruleText.rect.height * 1.1f);
     }
 }

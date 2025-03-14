@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class ControlCerealBowl : MonoBehaviour
 {
     [SerializeField] private Transform cerealBowl;
     [SerializeField] private GameObject cereal;
+    [SerializeField] private SetCerealPanel setCerealPanel;
     private SortedDictionary<CerealClass, LinkedList<GameObject> > cerealBowlPool = new();
     private Bounds cerealBowlBounds;
+    public int[,] Counts = new int[6,5];
 
     private void Awake()
     {
@@ -19,7 +20,7 @@ public class ControlCerealBowl : MonoBehaviour
     {
         ChangeCereal(new CerealClass(CerealShape.Triangle, CerealColor.Red), 4);
         ChangeCereal(new CerealClass(CerealShape.Square, CerealColor.Red), 3);
-        ChangeCereal(new CerealClass(CerealShape.Pentagon, CerealColor.Blue), 2);
+        ChangeCereal(new CerealClass(CerealShape.Hexagon, CerealColor.Blue), 2);
     }
 
     // cerealClass를 count만큼 추가하거나 감소
@@ -27,16 +28,15 @@ public class ControlCerealBowl : MonoBehaviour
     {
         if (count >= 0)
         {
+            setCerealPanel.ChangeCount(cerealClass, count);
             StartCoroutine(AddCerealCoroutine(cerealClass, count));
         }
         else
         {
-            count = -count;
-
-            //Debug.Log(cerealBowlPool[cerealClass].Count);
-            if (cerealBowlPool.ContainsKey(cerealClass) && cerealBowlPool[cerealClass].Count >= count) // cerealClass가 count개 이상일 때만 동작
+            if (cerealBowlPool.ContainsKey(cerealClass) && cerealBowlPool[cerealClass].Count >= -count) // cerealClass가 count개 이상일 때만 동작
             {
-                StartCoroutine(RemoveCerealCoroutine(cerealClass, count));
+                setCerealPanel.ChangeCount(cerealClass, count);
+                StartCoroutine(RemoveCerealCoroutine(cerealClass, -count));
             }
             else
             {
@@ -92,22 +92,32 @@ public class ControlCerealBowl : MonoBehaviour
     {
         GameObject newCereal = Instantiate(cereal);
 
-        newCereal.transform.GetChild(0).GetComponent<TextMeshPro>().text = (3 + (int)cerealClass.shape).ToString();
+        SpriteRenderer newCerealImage = newCereal.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        Color newColor = Color.black;
 
         switch (cerealClass.color)
         {
             case CerealColor.Red:
-                newCereal.GetComponent<SpriteRenderer>().color = Color.red;
+                newColor = new Color(255, 0, 0);
                 break;
             case CerealColor.Green:
-                newCereal.GetComponent<SpriteRenderer>().color = Color.green;
+                newColor = new Color(0, 255, 0);
                 break;
             case CerealColor.Blue:
-                newCereal.GetComponent<SpriteRenderer>().color = Color.blue;
+                newColor = new Color(0, 100, 255);
+                break;
+            case CerealColor.Pink:
+                newColor = new Color(255, 100, 255);
+                break;
+            case CerealColor.Yellow:
+                newColor = new Color(240, 240, 0);
                 break;
             default:
                 break;
         }
+
+        newCerealImage.sprite = LevelManager.Instance.Sprites[(int)cerealClass.shape];
+        newCerealImage.color = newColor;
 
         return newCereal;
     }

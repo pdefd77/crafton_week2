@@ -15,7 +15,7 @@ public class ImplementRule_testcode : MonoBehaviour
         if (controlCerealBowl.ChangeCereal(new CerealClass(cerealShape1, cerealColor1), -cerealClass1Count)) controlCerealBowl.ChangeCereal(new CerealClass(cerealShape2, cerealColor2), cerealClass2Count);
     }
 
-    public void ImplementruleVictory()
+    public void ImplementRuleVictory()
     {
         if (controlCerealBowl.ChangeCereal(new CerealClass(cerealShape1, cerealColor1), -cerealClass1Count)) Debug.Log("½Â¸®");
     }

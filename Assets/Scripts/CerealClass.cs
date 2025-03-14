@@ -1,20 +1,22 @@
 using System;
-using System.Collections.Generic;
-using UnityEngine;
 
 public enum CerealShape
 {
+    Circle,
     Triangle,
     Square,
     Pentagon,
-    Hexagon
+    Hexagon,
+    Star
 }
 
 public enum CerealColor
 {
     Red,
     Green,
-    Blue
+    Blue,
+    Pink,
+    Yellow
 }
 
 public struct CerealClass: IComparable<CerealClass>
