@@ -1,6 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public enum Shape
+public enum CerealShape
 {
     Triangle,
     Square,
@@ -8,21 +10,30 @@ public enum Shape
     hexagon
 }
 
-public enum Color
+public enum CerealColor
 {
     Red,
     Green,
     Blue
 }
 
-public class CerealClass
+public struct CerealClass: IComparable<CerealClass>
 {
-    public Shape shape;
-    public Color color;
+    private CerealShape shape;
+    private CerealColor color;
 
-    public CerealClass(Shape shape, Color color)
+    public CerealClass(CerealShape shape, CerealColor color)
     {
         this.shape = shape;
         this.color = color;
+    }
+
+    public readonly int CompareTo(CerealClass other)
+    {
+        if (shape == other.shape)
+        {
+            return (int)color - (int)other.color;
+        }
+        return (int)shape - (int)other.shape;
     }
 }
