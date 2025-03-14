@@ -6,8 +6,8 @@ public enum CerealShape
 {
     Triangle,
     Square,
-    pentagon,
-    hexagon
+    Pentagon,
+    Hexagon
 }
 
 public enum CerealColor
@@ -19,8 +19,8 @@ public enum CerealColor
 
 public struct CerealClass: IComparable<CerealClass>
 {
-    private CerealShape shape;
-    private CerealColor color;
+    public CerealShape shape;
+    public CerealColor color;
 
     public CerealClass(CerealShape shape, CerealColor color)
     {
