@@ -16,16 +16,12 @@ public class ControlCerealBowl : MonoBehaviour
         cerealBowlBounds = cerealBowl.GetComponent<CompositeCollider2D>().bounds;
     }
 
-    private void Start()
-    {
-        ChangeCereal(new CerealClass(CerealShape.Triangle, CerealColor.Red), 4);
-        ChangeCereal(new CerealClass(CerealShape.Square, CerealColor.Red), 3);
-        ChangeCereal(new CerealClass(CerealShape.Hexagon, CerealColor.Blue), 2);
-    }
-
     // cerealClass를 count만큼 추가하거나 감소
-    public bool ChangeCereal(CerealClass cerealClass, int count)
+    public bool ChangeCereal((CerealClass ,int) Info)
     {
+        CerealClass cerealClass = Info.Item1;
+        int count = Info.Item2;
+
         if (count >= 0)
         {
             setCerealPanel.ChangeCount(cerealClass, count);
@@ -47,6 +43,14 @@ public class ControlCerealBowl : MonoBehaviour
         return true;
     }
 
+    public bool CheckCereal((CerealClass, int) Info)
+    {
+        CerealClass cerealClass = Info.Item1;
+        int count = Info.Item2;
+
+        return (cerealBowlPool.ContainsKey(cerealClass) && cerealBowlPool[cerealClass].Count == count);
+    }
+
     // cerealClass를 count개 추가
     private IEnumerator AddCerealCoroutine(CerealClass cerealClass, int count)
     {
@@ -66,6 +70,13 @@ public class ControlCerealBowl : MonoBehaviour
 
             yield return null;
             //yield return new WaitForSeconds(0.1f);
+        }
+
+        if (cerealClass.shape == CerealShape.Star)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            LevelManager.Instance.Win();
         }
         
         yield break;
@@ -100,19 +111,19 @@ public class ControlCerealBowl : MonoBehaviour
         switch (cerealClass.color)
         {
             case CerealColor.Red:
-                newColor = new Color(255, 0, 0);
+                newColor = new Color(1f, 0, 0);
                 break;
             case CerealColor.Green:
-                newColor = new Color(0, 255, 0);
+                newColor = new Color(0, 1f, 0);
                 break;
             case CerealColor.Blue:
-                newColor = new Color(0, 100, 255);
+                newColor = new Color(0, 0.4f, 1f);
                 break;
             case CerealColor.Pink:
-                newColor = new Color(255, 100, 255);
+                newColor = new Color(1f, 0.4f, 1f);
                 break;
             case CerealColor.Yellow:
-                newColor = new Color(240, 240, 0);
+                newColor = new Color(0.95f, 0.95f, 0);
                 break;
             default:
                 break;
