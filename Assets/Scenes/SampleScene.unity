@@ -1818,6 +1818,7 @@ MonoBehaviour:
   cerealColor2: 0
   cerealClass2Count: 1
   controlCerealBowl: {fileID: 2101920454}
+  winImage: {fileID: 0}
 --- !u!114 &401586611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2933,6 +2934,7 @@ MonoBehaviour:
   cerealColor2: 0
   cerealClass2Count: 1
   controlCerealBowl: {fileID: 2101920454}
+  winImage: {fileID: 0}
 --- !u!114 &658877997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3812,7 +3814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4486,6 +4488,7 @@ MonoBehaviour:
   cerealColor2: 0
   cerealClass2Count: 0
   controlCerealBowl: {fileID: 2101920454}
+  winImage: {fileID: 0}
 --- !u!1 &939247709
 GameObject:
   m_ObjectHideFlags: 0
@@ -5030,6 +5033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sprites: []
+  winImage: {fileID: 102334035786912349, guid: a1abd27ceb0f02a438f622c3507e8e04, type: 3}
 --- !u!4 &1067951995
 Transform:
   m_ObjectHideFlags: 0
@@ -8703,6 +8707,7 @@ MonoBehaviour:
   cerealColor2: 0
   cerealClass2Count: 1
   controlCerealBowl: {fileID: 2101920454}
+  winImage: {fileID: 0}
 --- !u!114 &2117406887
 MonoBehaviour:
   m_ObjectHideFlags: 0

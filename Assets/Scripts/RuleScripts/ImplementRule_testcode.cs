@@ -9,14 +9,18 @@ public class ImplementRule_testcode : MonoBehaviour
     [SerializeField] CerealColor cerealColor2;
     [SerializeField] int cerealClass2Count;
     [SerializeField] ControlCerealBowl controlCerealBowl;
+    [SerializeField] GameObject winImage;
 
     public void ImplementRule()
     {
-        if (controlCerealBowl.ChangeCereal(new CerealClass(cerealShape1, cerealColor1), -cerealClass1Count)) controlCerealBowl.ChangeCereal(new CerealClass(cerealShape2, cerealColor2), cerealClass2Count);
-    }
+        if (controlCerealBowl.ChangeCereal(new CerealClass(cerealShape1, cerealColor1), -cerealClass1Count))
+        {
+            controlCerealBowl.ChangeCereal(new CerealClass(cerealShape2, cerealColor2), cerealClass2Count);
 
-    public void ImplementRuleVictory()
-    {
-        if (controlCerealBowl.ChangeCereal(new CerealClass(cerealShape1, cerealColor1), -cerealClass1Count)) Debug.Log("½Â¸®");
+            if (cerealShape2 == CerealShape.Star)
+            {
+                LevelManager.Instance.Win();
+            }
+        }
     }
 }

@@ -64,7 +64,8 @@ public class ControlCerealBowl : MonoBehaviour
             if (Random.Range(0, 2) == 0) nowList.AddFirst(newCereal);
             else nowList.AddLast(newCereal);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
+            //yield return new WaitForSeconds(0.1f);
         }
         
         yield break;
@@ -80,7 +81,8 @@ public class ControlCerealBowl : MonoBehaviour
             Destroy(nowList.Last.Value);
             nowList.RemoveLast();
 
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
+            //yield return new WaitForSeconds(0.1f);
         }
 
         if (nowList.Count == 0) cerealBowlPool.Remove(cerealClass);
@@ -116,7 +118,7 @@ public class ControlCerealBowl : MonoBehaviour
                 break;
         }
 
-        newCerealImage.sprite = LevelManager.Instance.Sprites[(int)cerealClass.shape];
+        newCerealImage.sprite = LevelManager.Instance.sprites[(int)cerealClass.shape];
         newCerealImage.color = newColor;
 
         return newCereal;
