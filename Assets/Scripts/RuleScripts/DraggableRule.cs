@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public enum RuleTypes
 {
@@ -11,12 +12,14 @@ public class DraggableRule : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     [SerializeField] private RuleTypes ruleTypes;
     [SerializeField] private int repeat;
+    private Transform canvas;
     private RectTransform rect;
     private CanvasGroup canvasGroup;
     private float w, h;
 
     private void Awake()
     {
+        canvas = FindFirstObjectByType<Canvas>().transform;
         rect = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
@@ -44,6 +47,12 @@ public class DraggableRule : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) return;
+
+        if (transform.parent != canvas)
+        {
+            transform.parent.GetComponent<Image>().color = new Color(0.7f, 1f, 0.7f);
+            transform.SetParent(canvas);
+        }
 
         canvasGroup.alpha = 1.0f;
         canvasGroup.blocksRaycasts = true;
